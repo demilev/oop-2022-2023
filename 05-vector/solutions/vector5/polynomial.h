@@ -5,7 +5,6 @@
 class Polynomial
 {
 private:
-    int power;
     Vector<double> coef;
 
 public:

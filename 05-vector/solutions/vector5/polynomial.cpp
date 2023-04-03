@@ -1,13 +1,13 @@
 #include <iostream>
 #include "polynomial.h"
 
-Polynomial::Polynomial() : power(-1), coef() {}
+Polynomial::Polynomial() : coef() {}
 
 double Polynomial::calculate(double x)
 {
     double result = 0;
     double currentPower = 1;
-    for (int i = 0; i <= power; i++)
+    for (int i = 0; i < coef.getSize(); i++)
     {
         result += coef.get(i) * currentPower;
         currentPower *= x;
@@ -23,7 +23,7 @@ double Polynomial::operator()(double x)
 
 void Polynomial::print()
 {
-    for (int i = 0; i <= power; i++)
+    for (int i = 0; i < coef.getSize(); i++)
     {
         std::cout << coef.get(i) << " ";
     }
@@ -42,9 +42,9 @@ void Polynomial::removeCoef()
 }
 
 Polynomial Polynomial::operator+(const Polynomial &other)
-{
-    int maxPower = std::max(power, other.power);
-    int minPower = std::min(power, other.power);
+{   
+    int maxPower = std::max(coef.getSize(), other.coef.getSize());
+    int minPower = std::min(coef.getSize(), other.coef.getSize());
     Polynomial result; // Създаваме полином, в който ще трупаме резултата
 
     // Добавяме сумата на коефициентите, докато стигнем по-малката от двете степени
@@ -54,7 +54,7 @@ Polynomial Polynomial::operator+(const Polynomial &other)
     }
 
     // Добавяме останалите коефициенти на полинома от по-голяма степен
-    if (other.power < power)
+    if (other.coef.getSize() < coef.getSize())
     {
         for (int i = minPower + 1; i <= maxPower; i++)
         {
