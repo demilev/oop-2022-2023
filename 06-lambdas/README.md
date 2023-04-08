@@ -63,6 +63,8 @@ int B::plus(int y)
 
 <br/>
 
+https://domiyanyue.medium.com/c-development-tutorial-2-compile-multiple-files-1-compiling-process-basics-41fba37eed6c
+
 ## std::function
 
 ```c++
@@ -98,9 +100,22 @@ int main()
 ```c++
 int main()
 {
+    double a = 3;
+    double b = 4;
+
     std::function<int(int)> fn = [](int x) -> int { return x + 5; };
-    
     std::cout << fn(1) << std::endl;
+
+    // Копие на a ще бъде достъпно в тялото на функцията
+    std::function<int(int)> fn1 = [a](int x) -> int { return x + 5; };
+    // Самото a ще бъде достъпно в тялото на функцията
+    std::function<int(int)> fn2 = [&a](int x) -> int { return x + 5; };
+    // Самото a и копие на b ще бъдат достъпни в тялото на функцията
+    std::function<int(int)> fn3 = [&a](int x) -> int { return x + 5; };
+    // Всичко в текущия контекст ще бъде достъпно като копие в тялото на функцията
+    std::function<int(int)> fn4 = [=](int x) -> int { return x + 5; };
+    // Всичко в текущия контекст ще бъде достъпно по референция в тялото на функцията
+    std::function<int(int)> fn5 = [&](int x) -> int { return x + 5; };
 
     return 0;
 }
@@ -108,7 +123,7 @@ int main()
 
 ## Задачи
 
-### Зад. 1
+### Зад. 1 - [Решение](./solutions/lambdas.cpp)
 
 Имплементирайте функция, която
 
@@ -116,7 +131,7 @@ int main()
 * приема две функции(`f`, `g`) и връща функция(`h`), която е тяхна композиция (`h(x) = f(g(x))`)
 * приема булева функция(`p`) и две други функции(`f`, `g`) и която връща функция(`h`), която прилага `f`, ако `p` е истина и `g` в противен случай(т.е. `h(x) = f(x), ако p(x) = true` и `h(x) = g(x), ако p(x) = false`)
 
-### Зад. 2
+### Зад. 2 - [Решение](./solutions/vector/)
 
 Разширете класа `Vector` от миналата седмица със следните методи:
 
@@ -126,7 +141,3 @@ int main()
 * `foldLeft(R result, std::function<R(R, E)> f)`, която обхожда масива и прилага функцията `f` върху резултата от последното й прилагане и текущия елемент
 * `foldRight(R result, std::function<R(R, E)> f)`, която обхожда масива отзад напред и прилага функцията `f` върху резултата от последното й прилагане и текущия елемент
 * `flatMap(std::function<Vector<U>(T)> f)`, която връща нов `Vector<U>`, елементите на който са получени от елементите на текущия след прилагането на фунцкията `f` върху всеки един от тях
-
-
-
-https://meet.google.com/niu-zpxp-sea
