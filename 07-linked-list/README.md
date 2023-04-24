@@ -31,7 +31,7 @@ TEST_CASE("testing the factorial function")
 
 <br/>
 
-## Задачи
+## Задачи - [Решения](./solutions/)
 
 ### Зад. 1
 
