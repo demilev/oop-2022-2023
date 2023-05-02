@@ -15,6 +15,41 @@ public:
 };
 
 template <typename T>
+class LinkedListIterator
+{
+private:
+    Node<T> *current;
+public:
+    LinkedListIterator(Node<T>*);
+
+    T operator*();
+    LinkedListIterator<T> &operator++();
+    bool operator!=(const LinkedListIterator &);
+};
+
+template <typename T>
+LinkedListIterator<T>::LinkedListIterator(Node<T> *current): current(current) {}
+
+template <typename T>
+T LinkedListIterator<T>::operator*()
+{
+    return current->data;
+}
+
+template <typename T>
+LinkedListIterator<T>& LinkedListIterator<T>::operator++()
+{
+    current = current->next;
+    return *this;
+}
+
+template <typename T>
+bool LinkedListIterator<T>::operator!=(const LinkedListIterator &other)
+{
+    return this->current != other.current;
+}
+
+template <typename T>
 class LinkedList
 {
 private:
@@ -54,6 +89,10 @@ public:
 
     template <typename U>
     friend LinkedList<U> mergeLists(const LinkedList<U> &, const LinkedList<U> &);
+
+
+    LinkedListIterator<T> begin();
+    LinkedListIterator<T> end();
 };
 
 template <typename T>
@@ -374,4 +413,16 @@ LinkedList<T> mergeLists(const LinkedList<T> &first, const LinkedList<T> &second
     }
 
     return LinkedList<T>(newStart, first.size + second.size);
+}
+
+template <typename T>
+LinkedListIterator<T> LinkedList<T>::begin()
+{
+    return LinkedListIterator<T>(this->start);
+}
+
+template <typename T>
+LinkedListIterator<T> LinkedList<T>::end()
+{
+    return LinkedListIterator<T>(nullptr);
 }
