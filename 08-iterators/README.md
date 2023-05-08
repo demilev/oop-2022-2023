@@ -65,7 +65,7 @@ int main()
 
 ## Задачи
 
-### Зад. 1
+### Зад. 1 - [Решение](./solutions/range.cpp)
 
 Имплементирайте клас `Range`, който предсатвлява краен интервал от цели числа. Добавете
 
@@ -80,15 +80,15 @@ int main()
 * `RangeIterator& operator++()` оператор в класа `RangeIterator`
 * `bool operator != (const RangeIterator &other)` оператор в класа `RangeIterator`
 
-### Зад. 2
+### Зад. 2 - [Решение](../lib/list.h) (Разгледайте `begin` и `end` методите на класа `LinkedList` и класа `LinkedListIterator`)
 
 Добавете итератор за класа `LinkedList`.
 
-### Зад. 3
+### Зад. 3 - [Решение](../lib/list.h) (Разгледайте `begin` и `end` методите на класа `LinkedList` и класа `LinkedListIterator`)
 
 Добавете итератор за класа `LinkedList`, който да позволява промяна на елементите на списъка.
 
-### Зад. 4
+### Зад. 4 - [Решение](../lib/vector.h) (Разгледайте `begin` и `end` методите на класа `Vector` и класовете `VectorIndexIterator` и `VectorPtrIterator`)
 
 Добавете итератор за класа `Vector`. Направете имплементация, която:
 

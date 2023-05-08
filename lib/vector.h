@@ -2,6 +2,12 @@
 
 #include <functional>
 
+template <typename T, typename ReturnT>
+class VectorIndexIterator;
+
+template <typename T, typename ReturnT>
+class VectorPtrIterator;
+
 template <typename T>
 class Vector
 {
@@ -26,6 +32,7 @@ public:
     int getSize() const;
 
     T get(int) const;
+    T& get(int);
 
     void add(T);
 
@@ -59,6 +66,41 @@ public:
 
     template <typename U>
     Vector<U> flatMap(std::function<Vector<U>(T)>);
+
+    VectorPtrIterator<T, T> begin() const;
+    VectorPtrIterator<T, T> end() const;
+
+    VectorPtrIterator<T, T &> begin();
+    VectorPtrIterator<T, T &> end();
+};
+
+template <typename T, typename ReturnT>
+class VectorIndexIterator
+{
+private:
+    int index;
+    Vector<T> *v;
+
+public:
+    VectorIndexIterator(int, Vector<T> *);
+
+    ReturnT operator*();
+    VectorIndexIterator<T, ReturnT> &operator++();
+    bool operator!=(const VectorIndexIterator<T, ReturnT> &);
+};
+
+template <typename T, typename ReturnT>
+class VectorPtrIterator
+{
+private:
+    T *elem;
+
+public:
+    VectorPtrIterator(T *);
+
+    ReturnT operator*();
+    VectorPtrIterator<T, ReturnT> &operator++();
+    bool operator!=(const VectorPtrIterator<T, ReturnT> &);
 };
 
 template <typename T>
@@ -133,6 +175,13 @@ T Vector<T>::get(int index) const
 {
     return arr[index];
 }
+
+template <typename T>
+T& Vector<T>::get(int index)
+{
+    return arr[index];
+}
+
 
 template <typename T>
 void Vector<T>::add(T elem)
@@ -303,4 +352,72 @@ Vector<U> Vector<T>::flatMap(std::function<Vector<U>(T)> f)
     }
 
     return result;
+}
+
+template <typename T>
+VectorPtrIterator<T, T &> Vector<T>::begin()
+{
+    return VectorPtrIterator<T, T &>(arr);
+}
+
+template <typename T>
+VectorPtrIterator<T, T &> Vector<T>::end()
+{
+    return VectorPtrIterator<T, T &>(arr + size);
+}
+
+template <typename T>
+VectorPtrIterator<T, T> Vector<T>::begin() const
+{
+    return VectorPtrIterator<T, T>(arr);
+}
+
+template <typename T>
+VectorPtrIterator<T, T> Vector<T>::end() const
+{
+    return VectorPtrIterator<T, T>(arr + size);
+}
+
+template <typename T, typename ReturnT>
+VectorIndexIterator<T, ReturnT>::VectorIndexIterator(int index, Vector<T> *v) : index(index), v(v) {}
+
+template <typename T, typename ReturnT>
+ReturnT VectorIndexIterator<T, ReturnT>::operator*()
+{
+    return v->get(index);
+}
+
+template <typename T, typename ReturnT>
+VectorIndexIterator<T, ReturnT> &VectorIndexIterator<T, ReturnT>::operator++()
+{
+    index++;
+    return *this;
+}
+
+template <typename T, typename ReturnT>
+bool VectorIndexIterator<T, ReturnT>::operator!=(const VectorIndexIterator<T, ReturnT> &other)
+{
+    return this->index != other.index || this->v != other.v;
+}
+
+template <typename T, typename ReturnT>
+VectorPtrIterator<T, ReturnT>::VectorPtrIterator(T *elem) : elem(elem) {}
+
+template <typename T, typename ReturnT>
+ReturnT VectorPtrIterator<T, ReturnT>::operator*()
+{
+    return *elem;
+}
+
+template <typename T, typename ReturnT>
+VectorPtrIterator<T, ReturnT> &VectorPtrIterator<T, ReturnT>::operator++()
+{
+    elem++;
+    return *this;
+}
+
+template <typename T, typename ReturnT>
+bool VectorPtrIterator<T, ReturnT>::operator!=(const VectorPtrIterator<T, ReturnT> &other)
+{
+    return this->elem != other.elem;
 }
