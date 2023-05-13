@@ -52,7 +52,7 @@ private:
 * https://cplusplus.com/reference/vector/vector/
 * https://cplusplus.com/reference/string/string/
 
-## Задачи
+## Задачи - [Решения](./solutions/)
 
 С техниките за наследяване и композиция изградете класова йерархия, представляваща учебни ресурси.
 
