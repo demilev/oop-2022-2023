@@ -28,7 +28,7 @@ void f1()
     cout << "\n f1() End ";
 }
   
-void f2() throw(int)
+void f2()
 {
     cout << "\n f2() Start ";
     f1();

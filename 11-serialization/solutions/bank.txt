@@ -1,0 +1,1 @@
+depositaccount 0 0 0.05 1 savingsaccount 0 0 0.05 
