@@ -1,0 +1,4 @@
+id,name,address,x,y,rooms
+1,Test1,Address1,30.000000,30.000000,5
+2,Test2,Address2,40.000000,20.000000,15
+3,Test3,Address3,-10.000000,55.000000,3
