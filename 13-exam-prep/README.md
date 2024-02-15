@@ -21,8 +21,8 @@
 
 * `bool isPayNow()`
 * `bool isPayLater()`
-* `double price()`
-* `std::string currency()`
+* `double getPrice()`
+* `std::string getCurrency()`
 
 ### Зад. 2 - [Решение](solutions/main.cpp)
 
